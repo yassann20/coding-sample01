@@ -1,3 +1,4 @@
+$(function(){
 $('.slide-fade1').on('inview', function(event, isInView){
     if(isInView){
         $(this).addClass('slide-fade-in');
@@ -12,4 +13,9 @@ $('.growing').on('inview', function(event, isInView){
     if(isInView){
         $(this).addClass('growing-in');
     }
+});
+$('.hamburger').on('click', function(){
+    $("nav").toggleClass("active");
+    $("span").toggleClass("active");
+});
 });

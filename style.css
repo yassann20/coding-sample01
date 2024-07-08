@@ -1,12 +1,17 @@
 @charset "UTF-8";
 @media (min-width: 1400px) {
   body {
-    width: 1400px;
+    width: 100%;
     margin: 0 auto;
     font-family: "游ゴシック体", YuGothic, "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック", "Yu Gothic", sans-serif;
+    overflow-x: hidden;
   }
   body header {
     position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
   }
   body header div.logo {
     position: absolute;
@@ -17,22 +22,20 @@
     left: 0;
     margin: 40px 50px 0;
   }
-  body header div.logo img.close {
+  body header div.logo img {
     display: block;
     width: 100%;
     height: auto;
   }
-  body header div.logo img.open {
-    display: none;
-  }
   body header div.hamburger {
-    position: absolute;
+    position: fixed;
     display: inline-block;
     top: 0;
     right: 0;
     width: 100px;
     height: 100px;
     background-color: #ff2a2a;
+    z-index: 110;
   }
   body header div.hamburger span {
     position: absolute;
@@ -40,31 +43,89 @@
     width: 50px;
     height: 2px;
     background-color: white;
+    transition: all 0.3s;
   }
   body header div.hamburger span:nth-of-type(1) {
     top: 36px;
   }
+  body header div.hamburger span:nth-of-type(1).active {
+    top: 50px;
+    transform: rotate(-45deg);
+  }
   body header div.hamburger span:nth-of-type(2) {
     top: 50px;
+  }
+  body header div.hamburger span:nth-of-type(2).active {
+    display: none;
   }
   body header div.hamburger span:nth-of-type(3) {
     top: 64px;
   }
-  body header div.fv {
+  body header div.hamburger span:nth-of-type(3).active {
+    top: 50px;
+    transform: rotate(45deg);
+  }
+  body nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #ff2a2a;
+    z-index: 100;
+    opacity: 0;
+    transition: all 0.5s;
+  }
+  body nav.active {
+    opacity: 1;
+  }
+  body nav div.logo {
+    position: absolute;
+    display: inline-block;
+    width: 100px;
+    height: auto;
+    top: 0;
+    left: 0;
+    margin: 40px 50px 0;
+    transition: all 0.3s;
+  }
+  body nav div.logo img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  body nav ul {
+    width: 250px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 110px auto 0;
+  }
+  body nav ul li {
+    width: 250px;
+    margin: 10px 0;
+    text-align: center;
+  }
+  body nav ul li a {
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+  }
+  body div.fv {
     position: relative;
     width: 100%;
     height: 720px;
   }
-  body header div.fv div.img-panel {
+  body div.fv div.img-panel {
     position: absolute;
     top: 0;
     right: 0;
     width: 1050px;
     height: 720px;
   }
-  body header div.fv div.img-panel div.img1,
-  body header div.fv div.img-panel div.img2,
-  body header div.fv div.img-panel div.img3 {
+  body div.fv div.img-panel div.img1,
+  body div.fv div.img-panel div.img2,
+  body div.fv div.img-panel div.img3 {
     position: absolute;
     top: 0;
     right: 0;
@@ -75,9 +136,9 @@
     background-position: center;
     animation: image-switch-animation 15s infinite;
   }
-  body header div.fv div.img-panel div.img1::before,
-  body header div.fv div.img-panel div.img2::before,
-  body header div.fv div.img-panel div.img3::before {
+  body div.fv div.img-panel div.img1::before,
+  body div.fv div.img-panel div.img2::before,
+  body div.fv div.img-panel div.img3::before {
     content: "";
     position: absolute;
     top: 0;
@@ -88,15 +149,15 @@
     pointer-events: none;
     /* シャドウが画像の操作を邪魔しないように */
   }
-  body header div.fv div.img-panel div.img1 {
+  body div.fv div.img-panel div.img1 {
     background-image: url("/img/mainvisual1.jpg");
     animation-delay: 0s;
   }
-  body header div.fv div.img-panel div.img2 {
+  body div.fv div.img-panel div.img2 {
     background-image: url("/img/mainvisual2.jpg");
     animation-delay: 5s;
   }
-  body header div.fv div.img-panel div.img3 {
+  body div.fv div.img-panel div.img3 {
     background-image: url("/img/mainvisual3.jpg");
     animation-delay: 10s;
   }
@@ -117,19 +178,19 @@
       opacity: 0;
     }
   }
-  body header div.fv div.fv-text {
+  body div.fv div.fv-text {
     position: absolute;
     top: 280px;
     left: 140px;
     width: 464px;
     height: 241px;
   }
-  body header div.fv div.fv-text h1 {
+  body div.fv div.fv-text h1 {
     font-size: 47px;
     color: #333333;
     text-shadow: 0 4px 6px #ffffff;
   }
-  body header div.fv div.fv-text a.fv-button {
+  body div.fv div.fv-text a.fv-button {
     display: block;
     width: 464px;
     height: 63px;
@@ -143,14 +204,14 @@
     margin-top: 30px;
     transition: all 0.3s;
   }
-  body header div.fv div.fv-text a.fv-button:hover {
+  body div.fv div.fv-text a.fv-button:hover {
     transform: scale(1.1);
   }
   body main {
     position: relative;
     margin-top: 120px;
   }
-  body main div.content1 h2 {
+  body main section.content1 h2 {
     position: relative;
     width: 100%;
     height: 61px;
@@ -158,22 +219,23 @@
     font-size: 36px;
     margin-bottom: 80px;
   }
-  body main div.content1 h2::after {
+  body main section.content1 h2::after {
     position: absolute;
     top: 61px;
-    left: 650px;
+    left: 50%;
     content: "";
     width: 100px;
     height: 3px;
     background-color: #333333;
+    transform: translateX(-50%);
   }
-  body main div.content1 div.c1-content {
+  body main section.content1 div.c1-content {
     position: relative;
     width: 100%;
     background-color: #ff2a2a;
     padding: 80px 0;
   }
-  body main div.content1 div.c1-content div.question1 {
+  body main section.content1 div.c1-content div.question1 {
     display: flex;
     width: 700px;
     height: 200px;
@@ -181,25 +243,28 @@
     border-radius: 0 20px 20px 0;
     margin: 0 calc(100% - 700px) 40px 0;
     padding: 70px 161px;
+    opacity: 0;
+    transition: 1s;
+    transform: translateX(-100%);
   }
-  body main div.content1 div.c1-content div.question1 img {
+  body main section.content1 div.c1-content div.question1 img {
     display: block;
     width: 87px;
     height: 60px;
   }
-  body main div.content1 div.c1-content div.question1 div.c1-text {
+  body main section.content1 div.c1-content div.question1 div.c1-text {
     margin-left: 30px;
   }
-  body main div.content1 div.c1-content div.question1 div.c1-text h3 {
+  body main section.content1 div.c1-content div.question1 div.c1-text h3 {
     width: 100%;
     height: 32px;
     font-size: 28px;
     color: #ff2a2a;
   }
-  body main div.content1 div.c1-content div.question1 div.c1-text p {
+  body main section.content1 div.c1-content div.question1 div.c1-text p {
     font-size: 18px;
   }
-  body main div.content1 div.c1-content div.question2 {
+  body main section.content1 div.c1-content div.question2 {
     display: flex;
     width: 700px;
     height: 200px;
@@ -207,28 +272,31 @@
     border-radius: 20px 0 0 20px;
     margin: 40px 0 0 calc(100% - 700px);
     padding: 70px 161px;
+    opacity: 0;
+    transition: 1s;
+    transform: translateX(100%);
   }
-  body main div.content1 div.c1-content div.question2 img {
+  body main section.content1 div.c1-content div.question2 img {
     display: block;
     width: 51px;
     height: 60px;
   }
-  body main div.content1 div.c1-content div.question2 div.c1-text {
+  body main section.content1 div.c1-content div.question2 div.c1-text {
     margin-left: 30px;
   }
-  body main div.content1 div.c1-content div.question2 div.c1-text h3 {
+  body main section.content1 div.c1-content div.question2 div.c1-text h3 {
     width: 100%;
     font-size: 28px;
     color: #ff2a2a;
   }
-  body main div.content1 div.c1-content div.question2 div.c1-text p {
+  body main section.content1 div.c1-content div.question2 div.c1-text p {
     font-size: 18px;
   }
-  body main div.content2 {
+  body main section.content2 {
     width: 860px;
     margin: 120px auto;
   }
-  body main div.content2 h2 {
+  body main section.content2 h2 {
     position: relative;
     width: 100%;
     height: 61px;
@@ -236,36 +304,37 @@
     font-size: 36px;
     margin: 0 0 80px;
   }
-  body main div.content2 h2::after {
+  body main section.content2 h2::after {
     position: absolute;
     top: 61px;
-    left: 380px;
+    left: 50%;
     content: "";
     width: 100px;
     height: 3px;
     background-color: #333333;
+    transform: translateX(-50%);
   }
-  body main div.content2 div.voice1,
-  body main div.content2 div.voice3 {
+  body main section.content2 div.voice1,
+  body main section.content2 div.voice3 {
     display: flex;
     width: 661px;
     height: 157px;
   }
-  body main div.content2 div.voice1 div.profile img,
-  body main div.content2 div.voice3 div.profile img {
+  body main section.content2 div.voice1 div.profile img,
+  body main section.content2 div.voice3 div.profile img {
     display: block;
     width: 120px;
     height: 120px;
     border-radius: 60px;
     background-color: #cccccc;
   }
-  body main div.content2 div.voice1 div.profile p,
-  body main div.content2 div.voice3 div.profile p {
+  body main section.content2 div.voice1 div.profile p,
+  body main section.content2 div.voice3 div.profile p {
     font-size: 12px;
     text-align: center;
   }
-  body main div.content2 div.voice1 p.review,
-  body main div.content2 div.voice3 p.review {
+  body main section.content2 div.voice1 p.review,
+  body main section.content2 div.voice3 p.review {
     position: relative;
     width: 516px;
     height: 136px;
@@ -275,8 +344,8 @@
     font-size: 16px;
     margin: 0 0 0 25px;
   }
-  body main div.content2 div.voice1 p.review::before,
-  body main div.content2 div.voice3 p.review::before {
+  body main section.content2 div.voice1 p.review::before,
+  body main section.content2 div.voice3 p.review::before {
     position: absolute;
     content: "";
     top: 85px;
@@ -289,27 +358,27 @@
     border-right: 15px solid #e9f1fb;
     border-left: 0;
   }
-  body main div.content2 div.voice2 {
+  body main section.content2 div.voice2 {
     display: flex;
     width: 661px;
     height: 157px;
     margin: 60px 0 60px calc(100% - 661px);
   }
-  body main div.content2 div.voice2 div.profile {
+  body main section.content2 div.voice2 div.profile {
     order: 2;
   }
-  body main div.content2 div.voice2 div.profile img {
+  body main section.content2 div.voice2 div.profile img {
     display: block;
     width: 120px;
     height: 120px;
     border-radius: 60px;
     background-color: #cccccc;
   }
-  body main div.content2 div.voice2 div.profile p {
+  body main section.content2 div.voice2 div.profile p {
     font-size: 12px;
     text-align: center;
   }
-  body main div.content2 div.voice2 p.review {
+  body main section.content2 div.voice2 p.review {
     position: relative;
     width: 516px;
     height: 136px;
@@ -320,7 +389,7 @@
     margin: 0 25px 0 0;
     order: 1;
   }
-  body main div.content2 div.voice2 p.review::before {
+  body main section.content2 div.voice2 p.review::before {
     position: absolute;
     content: "";
     top: 85px;
@@ -333,9 +402,9 @@
     border-left: 15px solid #e9f1fb;
     border-right: 0;
   }
-  body main div.content3 {
+  body main section.content3 {
     width: 100%;
-    padding: 60px 270px;
+    padding: 60px 0;
     background-image: url("/img/bg.gif");
     animation: image-move-animation 10s infinite linear;
   }
@@ -347,7 +416,7 @@
       background-position: -700px 700px;
     }
   }
-  body main div.content3 h2 {
+  body main section.content3 h2 {
     position: relative;
     width: 100%;
     height: 61px;
@@ -355,59 +424,65 @@
     font-size: 36px;
     margin: 0 0 80px;
   }
-  body main div.content3 h2::after {
+  body main section.content3 h2::after {
     position: absolute;
     top: 61px;
-    left: 380px;
+    left: 50%;
     content: "";
     width: 100px;
     height: 3px;
     background-color: #333333;
+    transform: translateX(-50%);
   }
-  body main div.content3 div.c3-flex {
-    width: 100%;
+  body main section.content3 div.c3-flex {
+    width: 880px;
     display: flex;
     gap: 40px 40px;
     flex-wrap: wrap;
+    margin: 0 auto;
   }
-  body main div.content3 div.c3-flex div.flex-content {
+  body main section.content3 div.c3-flex div.flex-content {
     width: 410px;
     height: auto;
     padding: 60px;
     background-color: #ffffff;
     border-radius: 20px;
   }
-  body main div.content3 div.c3-flex div.flex-content h3 {
+  body main section.content3 div.c3-flex div.flex-content h3 {
     height: 28px;
     font-size: 28px;
     text-align: center;
   }
-  body main div.content3 div.c3-flex div.flex-content h4 {
+  body main section.content3 div.c3-flex div.flex-content h4 {
     height: 18px;
     margin-top: 15px;
     font-size: 18px;
     text-align: center;
   }
-  body main div.content3 div.c3-flex div.flex-content p {
+  body main section.content3 div.c3-flex div.flex-content p {
     margin-top: 30px;
     font-size: 16px;
   }
-  body main div.cv {
+  body main section.cv {
     width: 100%;
-    padding: 120px 270px;
+    padding: 120px 0;
   }
-  body main div.cv h2 {
+  body main section.cv div.cv-content {
+    width: 860px;
+    margin: 0 auto;
+  }
+  body main section.cv div.cv-content h2 {
     height: 37px;
     font-size: 32px;
     text-align: center;
   }
-  body main div.cv p {
+  body main section.cv div.cv-content p {
     height: 21px;
     font-size: 18px;
     text-align: center;
     margin-top: 5px;
   }
-  body main div.cv a {
+  body main section.cv div.cv-content a {
     display: block;
     width: 100%;
     height: 58px;
@@ -416,12 +491,12 @@
     border: solid 1px #ff2a2a;
     color: #ffffff;
     font-size: 28px;
+    line-height: 58px;
     margin-top: 40px;
-    padding: 15px 0;
     text-align: center;
     transition: all 0.5s;
   }
-  body main div.cv a:hover {
+  body main section.cv div.cv-content a:hover {
     background-color: #ffffff;
     color: #ff2a2a;
   }
@@ -652,6 +727,9 @@
     border-radius: 0 20px 20px 0;
     margin: 0 calc(100% - 700px) 40px 0;
     padding: 19px;
+    opacity: 0;
+    transition: 1s;
+    transform: translateX(-100%);
   }
   body main div.content1 div.c1-content div.question1 img {
     display: block;
@@ -992,24 +1070,6 @@
     text-align: center;
   }
 }
-.slide-fade1 {
-  opacity: 0;
-  transition: 1s;
-  transform: translateX(-100%);
-}
-
-.slide-fade2 {
-  opacity: 0;
-  transition: 1s;
-  transform: translateX(100%);
-}
-
-.slide-fade-in {
-  opacity: 1;
-  transition: 1s;
-  transform: translateX(0);
-}
-
 .growing {
   opacity: 0;
   transform: scale(0.1);
@@ -1019,4 +1079,10 @@
 .growing-in {
   opacity: 1;
   transform: scale(1);
+}
+
+.slide-in-l,
+.slide-in-r {
+  transform: translateX(0) !important;
+  opacity: 1 !important;
 }/*# sourceMappingURL=style.css.map */
