@@ -1,5 +1,5 @@
 $(function () {
-    $('.hamburger').on('click', function () {
+    $('.hamburger').on('click ', function () {
         $("nav, span").stop().toggleClass("active");
     });
     $('.question-l').on('inview', function () {

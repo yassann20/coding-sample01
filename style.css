@@ -630,6 +630,7 @@
     width: 75px;
     height: 75px;
     background-color: #ff2a2a;
+    z-index: 110;
   }
   body header div.hamburger span {
     position: absolute;
@@ -637,38 +638,98 @@
     width: 35px;
     height: 2px;
     background-color: white;
+    transition: all 0.3s;
   }
   body header div.hamburger span:nth-of-type(1) {
     top: 26px;
   }
+  body header div.hamburger span:nth-of-type(1).active {
+    top: 37px;
+    transform: rotate(-45deg);
+  }
   body header div.hamburger span:nth-of-type(2) {
     top: 37px;
+  }
+  body header div.hamburger span:nth-of-type(2).active {
+    display: none;
   }
   body header div.hamburger span:nth-of-type(3) {
     top: 48px;
   }
-  body header nav {
-    display: none;
+  body header div.hamburger span:nth-of-type(3).active {
+    top: 37px;
+    transform: rotate(45deg);
   }
-  body header div.fv {
+  body nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #ff2a2a;
+    z-index: 100;
+    opacity: 0;
+    transition: all 0.5s;
+  }
+  body nav.active {
+    opacity: 1;
+  }
+  body nav div.logo {
+    position: absolute;
+    display: inline-block;
+    width: 100px;
+    height: auto;
+    top: 0;
+    left: 0;
+    margin: 40px 50px 0;
+    transition: all 0.3s;
+  }
+  body nav div.logo img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  body nav ul {
+    width: 250px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 110px auto 0;
+  }
+  body nav ul li {
+    width: 250px;
+    margin: 10px 0;
+    text-align: center;
+  }
+  body nav ul li a {
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+  }
+  body div.fv {
     position: relative;
-    width: 375px;
   }
-  body header div.fv div.img-panel {
+  body div.fv div.img-panel {
     position: relative;
     width: 375px;
     height: 300px;
   }
-  body header div.fv div.img-panel div.img {
+  body div.fv div.img-panel div.img1,
+  body div.fv div.img-panel div.img2,
+  body div.fv div.img-panel div.img3 {
     position: absolute;
+    top: 0;
+    right: 0;
     display: block;
     width: 100%;
     height: 100%;
-    background-image: url("/img/mainvisual1.jpg");
     background-size: cover;
     background-position: center;
+    animation: image-switch-animation 15s infinite;
   }
-  body header div.fv div.img-panel div.img::before {
+  body div.fv div.img-panel div.img1::before,
+  body div.fv div.img-panel div.img2::before,
+  body div.fv div.img-panel div.img3::before {
     content: "";
     position: absolute;
     top: 0;
@@ -679,15 +740,44 @@
     pointer-events: none;
     /* シャドウが画像の操作を邪魔しないように */
   }
-  body header div.fv div.fv-text {
+  body div.fv div.img-panel div.img1 {
+    background-image: url("/img/mainvisual1.jpg");
+    animation-delay: 0s;
+  }
+  body div.fv div.img-panel div.img2 {
+    background-image: url("/img/mainvisual2.jpg");
+    animation-delay: 5s;
+  }
+  body div.fv div.img-panel div.img3 {
+    background-image: url("/img/mainvisual3.jpg");
+    animation-delay: 10s;
+  }
+  @keyframes image-switch-animation {
+    0% {
+      opacity: 0;
+    }
+    5% {
+      opacity: 1;
+    }
+    25% {
+      opacity: 1;
+    }
+    30% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  body div.fv div.fv-text {
     position: relative;
   }
-  body header div.fv div.fv-text h1 {
+  body div.fv div.fv-text h1 {
     font-size: 28px;
     color: #333333;
     margin: 10px 16px;
   }
-  body header div.fv div.fv-text a.fv-button {
+  body div.fv div.fv-text a.fv-button {
     display: block;
     width: 343px;
     height: 58px;
@@ -704,17 +794,17 @@
     position: relative;
     margin-top: 80px;
   }
-  body main div.content1 {
+  body main section.content1 {
     width: 100%;
   }
-  body main div.content1 h2 {
+  body main section.content1 h2 {
     position: relative;
     width: 100%;
     height: 52px;
     font-size: 28px;
     text-align: center;
   }
-  body main div.content1 h2::after {
+  body main section.content1 h2::after {
     position: absolute;
     top: 52px;
     left: calc(50% - 50px);
@@ -723,13 +813,13 @@
     height: 3px;
     background-color: #333333;
   }
-  body main div.content1 div.c1-content {
+  body main section.content1 div.c1-content {
     position: relative;
     width: 100%;
     background-color: #ff2a2a;
     padding: 40px 0;
   }
-  body main div.content1 div.c1-content div.question1 {
+  body main section.content1 div.c1-content div.question-l {
     display: flex;
     width: 359px;
     height: 119px;
@@ -737,29 +827,33 @@
     border-radius: 0 20px 20px 0;
     margin: 0 calc(100% - 700px) 40px 0;
     padding: 19px;
-    opacity: 0;
+    opacity: 1;
     transition: 1s;
-    transform: translateX(-100%);
+    transform: translateX(0);
   }
-  body main div.content1 div.c1-content div.question1 img {
+  body main section.content1 div.c1-content div.question-l.hidden {
+    opacity: 0;
+    transform: translateX(-50%);
+  }
+  body main section.content1 div.c1-content div.question-l img {
     display: block;
     width: 87px;
     height: 60px;
     margin: 7px 0 6px;
   }
-  body main div.content1 div.c1-content div.question1 div.c1-text {
+  body main section.content1 div.c1-content div.question-l div.c1-text {
     margin-left: 30px;
   }
-  body main div.content1 div.c1-content div.question1 div.c1-text h3 {
+  body main section.content1 div.c1-content div.question-l div.c1-text h3 {
     width: 100%;
     height: 28px;
     font-size: 24px;
     color: #ff2a2a;
   }
-  body main div.content1 div.c1-content div.question1 div.c1-text p {
+  body main section.content1 div.c1-content div.question-l div.c1-text p {
     font-size: 18px;
   }
-  body main div.content1 div.c1-content div.question2 {
+  body main section.content1 div.c1-content div.question-r {
     display: flex;
     width: 359px;
     height: 119px;
@@ -767,37 +861,44 @@
     border-radius: 20px 0 0 20px;
     margin: 40px 0 0 calc(100% - 359px);
     padding: 19px 21px;
+    opacity: 1;
+    transition: 1s;
+    transform: translateX(0);
   }
-  body main div.content1 div.c1-content div.question2 img {
+  body main section.content1 div.c1-content div.question-r.hidden {
+    opacity: 0;
+    transform: translateX(50%);
+  }
+  body main section.content1 div.c1-content div.question-r img {
     display: block;
     width: 51px;
     height: 60px;
     margin: 7px 0 6px;
   }
-  body main div.content1 div.c1-content div.question2 div.c1-text {
+  body main section.content1 div.c1-content div.question-r div.c1-text {
     margin-left: 30px;
   }
-  body main div.content1 div.c1-content div.question2 div.c1-text h3 {
+  body main section.content1 div.c1-content div.question-r div.c1-text h3 {
     width: 100%;
     height: 28px;
     font-size: 24px;
     color: #ff2a2a;
   }
-  body main div.content1 div.c1-content div.question2 div.c1-text p {
+  body main section.content1 div.c1-content div.question-r div.c1-text p {
     font-size: 18px;
   }
-  body main div.content2 {
+  body main section.content2 {
     width: 100%;
     margin: 80px auto;
   }
-  body main div.content2 h2 {
+  body main section.content2 h2 {
     position: relative;
     width: 100%;
     height: 52px;
     font-size: 28px;
     text-align: center;
   }
-  body main div.content2 h2::after {
+  body main section.content2 h2::after {
     position: absolute;
     top: 52px;
     left: calc(50% - 50px);
@@ -806,8 +907,8 @@
     height: 3px;
     background-color: #333333;
   }
-  body main div.content2 div.voice1,
-  body main div.content2 div.voice3 {
+  body main section.content2 div.voice1,
+  body main section.content2 div.voice3 {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -815,26 +916,26 @@
     height: auto;
     margin: 0 auto;
   }
-  body main div.content2 div.voice1 div.profile,
-  body main div.content2 div.voice3 div.profile {
+  body main section.content2 div.voice1 div.profile,
+  body main section.content2 div.voice3 div.profile {
     order: 2;
     margin-top: 30px;
   }
-  body main div.content2 div.voice1 div.profile img,
-  body main div.content2 div.voice3 div.profile img {
+  body main section.content2 div.voice1 div.profile img,
+  body main section.content2 div.voice3 div.profile img {
     display: block;
     width: 120px;
     height: 120px;
     border-radius: 60px;
     background-color: #cccccc;
   }
-  body main div.content2 div.voice1 div.profile p,
-  body main div.content2 div.voice3 div.profile p {
+  body main section.content2 div.voice1 div.profile p,
+  body main section.content2 div.voice3 div.profile p {
     font-size: 12px;
     text-align: center;
   }
-  body main div.content2 div.voice1 p.review,
-  body main div.content2 div.voice3 p.review {
+  body main section.content2 div.voice1 p.review,
+  body main section.content2 div.voice3 p.review {
     order: 1;
     position: relative;
     width: 343px;
@@ -845,8 +946,8 @@
     font-size: 16px;
     margin: 0;
   }
-  body main div.content2 div.voice1 p.review::before,
-  body main div.content2 div.voice3 p.review::before {
+  body main section.content2 div.voice1 p.review::before,
+  body main section.content2 div.voice3 p.review::before {
     position: absolute;
     content: "";
     top: 100%;
@@ -859,7 +960,7 @@
     border-top: 15px solid #e9f1fb;
     border-bottom: 0;
   }
-  body main div.content2 div.voice2 {
+  body main section.content2 div.voice2 {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -867,22 +968,22 @@
     height: auto;
     margin: 40px auto;
   }
-  body main div.content2 div.voice2 div.profile {
+  body main section.content2 div.voice2 div.profile {
     order: 2;
     margin-top: 30px;
   }
-  body main div.content2 div.voice2 div.profile img {
+  body main section.content2 div.voice2 div.profile img {
     display: block;
     width: 120px;
     height: 120px;
     border-radius: 60px;
     background-color: #cccccc;
   }
-  body main div.content2 div.voice2 div.profile p {
+  body main section.content2 div.voice2 div.profile p {
     font-size: 12px;
     text-align: center;
   }
-  body main div.content2 div.voice2 p.review {
+  body main section.content2 div.voice2 p.review {
     order: 1;
     position: relative;
     width: 343px;
@@ -893,7 +994,7 @@
     font-size: 16px;
     margin: 0;
   }
-  body main div.content2 div.voice2 p.review::before {
+  body main section.content2 div.voice2 p.review::before {
     position: absolute;
     content: "";
     top: 100%;
@@ -906,12 +1007,12 @@
     border-top: 15px solid #e9f1fb;
     border-bottom: 0;
   }
-  body main div.content3 {
+  body main section.content3 {
     width: 100%;
     padding: 60px 16px;
     background-image: url("/img/bg.gif");
   }
-  body main div.content3 h2 {
+  body main section.content3 h2 {
     position: relative;
     width: 100%;
     height: 61px;
@@ -919,7 +1020,7 @@
     font-size: 36px;
     margin: 0 0 80px;
   }
-  body main div.content3 h2::after {
+  body main section.content3 h2::after {
     position: absolute;
     top: 61px;
     left: calc(50% - 50px);
@@ -928,49 +1029,49 @@
     height: 3px;
     background-color: #333333;
   }
-  body main div.content3 div.c3-flex {
+  body main section.content3 div.c3-flex {
     width: 100%;
     display: flex;
     gap: 32px;
     flex-wrap: wrap;
   }
-  body main div.content3 div.c3-flex div.flex-content {
+  body main section.content3 div.c3-flex div.flex-content {
     width: 343px;
     height: auto;
     padding: 30px;
     background-color: #ffffff;
     border-radius: 20px;
   }
-  body main div.content3 div.c3-flex div.flex-content h3 {
+  body main section.content3 div.c3-flex div.flex-content h3 {
     height: 28px;
     font-size: 28px;
     text-align: center;
   }
-  body main div.content3 div.c3-flex div.flex-content h4 {
+  body main section.content3 div.c3-flex div.flex-content h4 {
     height: 18px;
     margin-top: 15px;
     font-size: 18px;
     text-align: center;
   }
-  body main div.content3 div.c3-flex div.flex-content p {
+  body main section.content3 div.c3-flex div.flex-content p {
     margin-top: 30px;
     font-size: 16px;
   }
-  body main div.cv {
+  body main section.cv {
     width: 100%;
     padding: 60px 16px;
   }
-  body main div.cv h2 {
+  body main section.cv h2 {
     font-size: 24px;
     text-align: center;
   }
-  body main div.cv p {
+  body main section.cv p {
     height: 21px;
     font-size: 16px;
     text-align: center;
     margin-top: 5px;
   }
-  body main div.cv a {
+  body main section.cv a {
     display: block;
     width: 100%;
     height: 58px;
